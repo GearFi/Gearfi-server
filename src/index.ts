@@ -8,8 +8,12 @@ import ParseServer from 'parse-server';
 import http from 'http';
 import ngrok from 'ngrok';
 import { streamsSync } from '@moralisweb3/parse-server';
+const { EvmChain } = require("@moralisweb3/common-evm-utils")
 
 export const app = express();
+
+const address = "0x45F0bF42fc26923e88a46b15Ad22B89fA50Dbb37"
+const chain = EvmChain.ETHEREUM
 
 Moralis.start({
   apiKey: config.MORALIS_API_KEY,
@@ -44,3 +48,36 @@ httpServer.listen(config.PORT, async () => {
 });
 // This will enable the Live Query real-time server
 ParseServer.createLiveQueryServer(httpServer);
+
+async function getDemoData() {
+  // Get the nfts
+  const nftsBalances = await Moralis.EvmApi.nft.getWalletNFTs({
+    address,
+    chain,
+    limit: 10,
+  })
+
+  // Format the output to return name, amount and metadata
+  const nfts = nftsBalances.result.map((nft) => ({
+    name: nft.result.name,
+    amount: nft.result.amount,
+    metadata: nft.result.metadata,
+  }))
+
+  return { nfts }
+}
+
+app.get("/demo", async (req, res) => {
+  try {
+
+    // Get and return the crypto data
+    const data = await getDemoData()
+    res.status(200)
+    res.json(data)
+  } catch (error) {
+    // Handle errors
+    console.error(error)
+    res.status(500)
+    res.json({ error: error.message })
+  }
+})
