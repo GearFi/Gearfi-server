@@ -25,6 +25,8 @@ function validateAuthData(authData: any) {
       authData.statement = authenticated.statement;
       authData.uri = authenticated.uri;
       authData.moralisProfileId = authenticated.profileId;
+
+      
     })
 
     .catch(() => {
