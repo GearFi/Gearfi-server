@@ -28,7 +28,7 @@ moralis_1.default.start({
 exports.app.use(express_1.default.urlencoded({ extended: true }));
 exports.app.use(express_1.default.json());
 exports.app.use((0, cors_1.default)({
-    origin: 'https://640e64cd1b95cd6e650838ea--chic-custard-49bde6.netlify.app',
+    origin: 'http://localhost:3000',
     credentials: true,
 }));
 exports.app.use((0, parse_server_2.streamsSync)(parseServer_1.parseServer, {

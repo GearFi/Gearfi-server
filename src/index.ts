@@ -29,7 +29,7 @@ app.use(express.urlencoded({ extended: true }));
 app.use(express.json());
 
 app.use(cors({
-  origin: 'https://640e64cd1b95cd6e650838ea--chic-custard-49bde6.netlify.app',
+  origin: 'http://localhost:3000',
   credentials: true,
 }));
 
