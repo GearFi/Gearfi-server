@@ -27,7 +27,7 @@ app.use(express.urlencoded({ extended: true }));
 app.use(express.json());
 
 app.use(cors({
-  origin: 'https://kaleidoscopic-pixie-df26c2.netlify.app/',
+  origin: 'https://640e64cd1b95cd6e650838ea--chic-custard-49bde6.netlify.app',
   credentials: true,
 }));
 
